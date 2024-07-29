@@ -1,0 +1,22 @@
+{% extends 'tsp_app/base.html' %}
+
+{% block title %}TSP Form{% endblock %}
+
+{% block content %}
+<h2>TSP Form</h2>
+<form method="post" class="form-group">
+    {% csrf_token %}
+    <div class="mb-3">
+        {{ form.num_nodes.label_tag }}
+        {{ form.num_nodes|add_class:"form-control" }}
+    </div>
+    <div class="mb-3">
+        {{ form.min_weight.label_tag }}
+        {{ form.min_weight|add_class:"form-control" }}
+    </div>
+    <div class="mb-3">
+        {{ form.max_weight.label_tag }}
+        {{ form.max_weight|add_class:"form-control" }}
+    </div>
+    <button type="submit" class="btn btn-custom">Generate</button>
+{% endblock %}

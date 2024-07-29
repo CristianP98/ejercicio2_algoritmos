@@ -1,0 +1,30 @@
+{% extends 'tsp_app/base.html' %}
+
+{% block title %}TSP Results{% endblock %}
+
+{% block content %}
+<h2>TSP Results</h2>
+<p><strong>Shortest Path:</strong> {{ shortest_path }}</p>
+<p><strong>Shortest Distance:</strong> {{ shortest_distance }}</p>
+<h3>Weights Matrix:</h3>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            {% for _ in weights.0 %}
+            <th></th>
+            {% endfor %}
+        </tr>
+    </thead>
+    <tbody>
+        {% for row in weights %}
+        <tr>
+            {% for weight in row %}
+            <td>{{ weight }}</td>
+            {% endfor %}
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<a href="{% url 'tsp_view' %}" class="btn btn-custom mt-3">Back to Form</a>
+<a href="{% url 'compare_results_view' %}" class="btn btn-info mt-3">Compare Results</a>
+{% endblock %}

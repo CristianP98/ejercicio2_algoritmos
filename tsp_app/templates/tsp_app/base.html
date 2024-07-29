@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}TSP Project{% endblock %}</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa; /* Fondo blanco */
+            color: #212529; /* Texto oscuro */
+        }
+        .btn-custom {
+            background-color: #000; /* Botón negro */
+            color: #fff; /* Texto blanco */
+        }
+        .btn-custom:hover {
+            background-color: #343a40; /* Hover negro más oscuro */
+        }
+        .container {
+            margin-top: 20px;
+        }
+        .dark-mode {
+            background-color: #212529;
+            color: #f8f9fa;
+        }
+        .dark-mode .btn-custom {
+            background-color: #fff;
+            color: #000;
+        }
+        .dark-mode .btn-custom:hover {
+            background-color: #e9ecef;
+            color: #000;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="{% url 'tsp_view' %}">TSP Project</a>
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'tsp_view' %}">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'compare_results_view' %}">Compare Results</a>
+                </li>
+            </ul>
+            <button class="btn btn-dark ms-2" id="toggleDarkMode">Toggle Dark Mode</button>
+        </div>
+    </nav>
+
+    <div class="container">
+        {% block content %}
+        <!-- Aquí va el contenido específico de cada página -->
+        {% endblock %}
+    </div>
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.getElementById('toggleDarkMode').addEventListener('click', function() {
+            document.body.classList.toggle('dark-mode');
+        });
+    </script>
+</body>
+</html>

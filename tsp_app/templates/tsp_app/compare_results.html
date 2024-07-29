@@ -1,0 +1,9 @@
+{% extends 'tsp_app/base.html' %}
+
+{% block title %}Compare Results{% endblock %}
+
+{% block content %}
+<h2>Compare Results</h2>
+<p>{{ comparison_data }}</p>
+<a href="{% url 'tsp_view' %}" class="btn btn-custom mt-3">Back to Form</a>
+{% endblock %}
