@@ -1,12 +1,12 @@
 {% extends 'tsp_app/base.html' %}
 
-{% block title %}Form{% endblock %}
+{% block title %}Formulario TSP{% endblock %}
 
 {% block content %}
-<h2>Form</h2>
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit" class="btn btn-custom">Submit</button>
-</form>
+    <h1>Generar Problema del Viajero</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary mt-3">Generar</button>
+    </form>
 {% endblock %}

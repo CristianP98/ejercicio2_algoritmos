@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 import random
 import networkx as nx
@@ -7,13 +7,8 @@ from io import BytesIO
 import base64
 from .forms import TSPForm
 import time
+from .models import RouteResult
 
-def compare_results_view(request):
-    # Lógica para comparar resultados aquí
-    context = {
-        'comparison_data': 'Aquí va la lógica para comparar resultados',
-    }
-    return render(request, 'tsp_app/compare_results.html', context)
 def plot_graph(G, tour, current_node, pos):
     """Genera una imagen del gráfico en formato base64."""
     plt.clf()
@@ -30,7 +25,6 @@ def plot_graph(G, tour, current_node, pos):
     image_data = base64.b64encode(buffer.read()).decode('utf-8')
     buffer.close()
     return image_data
-
 
 def nearest_neighbor_tsp(G, start_node):
     """Resuelve el problema del vendedor viajero usando el algoritmo del vecino más cercano."""
@@ -53,7 +47,6 @@ def nearest_neighbor_tsp(G, start_node):
     tour_cost = sum(G[tour[i]][tour[i + 1]]['weight'] for i in range(len(tour) - 1))
 
     return tour, tour_cost, image_uris
-
 
 def tsp_view(request):
     """Maneja el formulario para generar y mostrar el resultado del TSP."""
@@ -93,8 +86,12 @@ def tsp_view(request):
         form = TSPForm()
     return render(request, 'tsp_app/form.html', {'form': form})
 
-
 def compare_results(request):
     """Muestra y compara los resultados almacenados en la sesión."""
     results = request.session.get('results', [])
     return render(request, 'tsp_app/compare_results.html', {'results': results})
+
+def delete_all_results(request):
+    """Borra todos los resultados almacenados en la sesión."""
+    request.session['results'] = []
+    return redirect('compare_results')

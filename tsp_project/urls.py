@@ -20,6 +20,5 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('tsp_app.urls')),
+    path('', include('tsp_app.urls')),  # Incluye las URLs de tsp_app
 ]
-
